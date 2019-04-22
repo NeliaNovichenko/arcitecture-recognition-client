@@ -1,14 +1,26 @@
 
-<div class="m-2">
-  Hi there!
-  Try out architecture styles prediction by uploading your building image!
-</div>
-<div class="input-group upload-block my-2">
-    <div class="custom-file">
-      <input type="file" class="custom-file-input" id="inputGroupFile04" (change)="onFileChanged($event)">
-      <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-    </div>
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" (click)="sendImage()">Predict style</button>
-    </div>
+<div>
+  <div class="m-2">
+    Hi there!
+    Try out architecture styles prediction by uploading your building image!
+  </div>
+  <div class="input-group upload-block my-2">
+      <div class="custom-file">
+        <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile04" (change)="onFileChanged($event)" >
+        <label class="custom-file-label" for="inputGroupFile04">{{file.name ? file.name : 'Choose file'}}</label>
+      </div>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="sendImage()">Predict style</button>
+      </div>
+  </div>
+
+  <img #imagePreview width="200" />	
+
+  <div *ngIf="!loading && result">
+    <div *ngFor="let key of objectKeys(result)">{{key + ' : ' + result[key]}}</div>
+    <button (click)="saveResult()">Save results</button>
+  </div>
+  <div *ngIf="loading" class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </div>

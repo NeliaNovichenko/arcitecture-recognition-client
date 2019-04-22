@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PredictionService } from '../../services/prediction.service';
 import { Observable, EMPTY } from 'rxjs';
 import { PredictionResult } from '../../models/prediction-result.model';
@@ -10,16 +10,36 @@ import { PredictionResult } from '../../models/prediction-result.model';
 })
 export class PredictionComponent {
 
-  constructor(private predictionService: PredictionService) { }
+  @ViewChild('imagePreview')
+  imagePreviewElement;
 
+  public objectKeys = Object.keys;
   public file: any = {};
-  public result$: Observable<PredictionResult> = EMPTY;
+  public result: PredictionResult;
+  public loading = false;
+
+  constructor(
+    private predictionService: PredictionService,
+  ) { }
 
   onFileChanged(event: any) {
     this.file = event.target.files[0];
+    this.imagePreviewElement.nativeElement.src = URL.createObjectURL(this.file);
   }
 
   sendImage() {
-    this.result$ = this.predictionService.get(this.file);
+    if (File.name === undefined) {
+      return;
+    }
+    this.result = null;
+    this.loading = true;
+    this.predictionService.get(this.file).subscribe(value => {
+      this.result = value;
+      this.loading = false;
+    });
+  }
+
+  saveResult() {
+
   }
 }

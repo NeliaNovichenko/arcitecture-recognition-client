@@ -1,0 +1,26 @@
+<div class="container-fluid sign-in">
+
+  <h3>Sign in</h3>
+
+  <form #signInForm="ngForm" (ngSubmit)="signIn()">
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" required class="form-control" #Email="ngModel" [class.is-invalid]="Email.invalid && Email.touched" name="email" [(ngModel)]="email">
+      <small class="text-danger" [class.d-none]='Email.valid || Email.untouched'>Email is required!</small>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" required class="form-control" #Password="ngModel" [class.is-invalid]="Password.invalid && Password.touched" name="passowrd" [(ngModel)]="password">
+      <small class="text-danger" [class.d-none]='Password.valid || Password.untouched'>Password is required!</small>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="signInForm.form.invalid" type="submit">Sing in</button>
+   
+  </form>
+  
+<div class="sign-up text-muted">
+  <span>Do not have a account? </span><button class="btn btn-light" [routerLink]="['/sign-up']">Sing Up</button>
+</div>
+</div>

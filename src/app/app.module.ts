@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,8 @@ import { ResultsTableComponent } from './components/results-table/results-table.
 import { ResultComponent } from './components/result/result.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +22,19 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     ResultsTableComponent,
     ResultComponent,
     DocumentationComponent,
-    NavBarComponent
+    NavBarComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: Window, useValue: window },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

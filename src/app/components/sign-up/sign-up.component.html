@@ -1,0 +1,36 @@
+<div class="container-fluid sign-up">
+
+  <!-- <i class="fa fa-user"></i> -->
+  <h3>Sign me up</h3>
+  
+  <form #userForm="ngForm" (ngSubmit)="signUp()">
+    
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" required class="form-control" #fName="ngModel" [class.is-invalid]="fName.invalid && fName.touched" name='firstName' [(ngModel)]="firstName" placeholder="Elon">
+      <small class="text-danger" [class.d-none]="fName.valid || fName.untouched">First name is required!</small>
+    </div>
+
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" required class="form-control" #lName="ngModel" [class.is-invalid]="lName.invalid && lName.touched" name='lastName' [(ngModel)]="lastName" placeholder="Mask">
+      <small class="text-danger" [class.d-none]="lName.valid || lName.untouched">Last name is required!</small>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" required class="form-control" #Email="ngModel" [class.is-invalid]="Email.invalid && Email.touched" name='email' [(ngModel)]="email" placeholder="example123@gmail.com">
+      <small class="text-danger" [class.d-none]="Email.valid || Email.untouched">Email is required!</small>      
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" required class="form-control" #Password="ngModel" [class.is-invalid]="Password.invalid && Password.touched" name='password' [(ngModel)]="password">
+    </div>
+
+    <button [disabled]='userForm.form.invalid' class="btn btn-primary " type="submit">Sign me up</button>
+
+  </form>
+  
+</div>
