@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { PredictionService } from '../../services/prediction.service';
-import { Observable, EMPTY } from 'rxjs';
 import { PredictionResult } from '../../models/prediction-result.model';
+import { ResultService } from '../../services/result.service';
+import { StyleByStringName } from '../../models/style.enum';
+import { ResultModel } from 'src/app/models/result.model';
 
 @Component({
   selector: 'app-prediction',
@@ -13,13 +15,17 @@ export class PredictionComponent {
   @ViewChild('imagePreview')
   imagePreviewElement;
 
-  public objectKeys = Object.keys;
-  public file: any = {};
-  public result: PredictionResult;
+  public file: any;
+  public result: PredictionResult[];
   public loading = false;
+
+  public title;
+  public description;
+  public imageDate: Date;
 
   constructor(
     private predictionService: PredictionService,
+    private resultService: ResultService
   ) { }
 
   onFileChanged(event: any) {
@@ -40,6 +46,18 @@ export class PredictionComponent {
   }
 
   saveResult() {
+    const result = {
+      title: this.title,
+      description: this.description,
+      date: new Date(),
+      imageDate: this.imageDate,
+      imageName: this.file.name,
 
+      style: StyleByStringName[this.result[0].style]
+    } as ResultModel;
+
+    this.resultService.crete(result, this.file).subscribe(() => {
+      console.log('saved');
+    });
   }
 }
