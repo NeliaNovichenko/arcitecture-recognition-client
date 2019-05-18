@@ -12,8 +12,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  private currentUser$ = new BehaviorSubject<User>(null);
-  public currentUser: User;
+  public currentUser$ = new BehaviorSubject<User>(null);
+  public currentUser: User = null;
 
   constructor(
     private httpClient: HttpClient,
@@ -23,21 +23,18 @@ export class UserService {
     this.setUpCurrentUserFromBackend().subscribe(() => { });
   }
 
-  public isSignedIn(): boolean {
-    return !!this.currentUser;
-  }
-
   // login : new_user2
   // pass: 666
   public signIn(loginModel: UserLoginModel): Observable<User> {
-    // const PATH = '/api/auth/sign-in';
-    const PATH = 'api/auth/sign-in';
+    const PATH = '/api/auth/sign-in';
+    // const PATH = 'https://localhost:44357/api/auth/sign-in';
 
     return this.httpClient.post<AuthModel>(PATH, loginModel)
       .pipe(
       tap(({user, token}) => {
         this.jwtService.persistToken(token);
         this.currentUser = user as User;
+        this.currentUser$.next(user as User);
         console.log('User signed in', user);
       }),
       catchError(this.errorHandlingService.handleError)
@@ -56,6 +53,7 @@ export class UserService {
       tap(({user, token}) => {
         this.jwtService.persistToken(token);
         this.currentUser = user as User;
+        this.currentUser$.next(user as User);
         console.log('User signed up', user);
       }),
       catchError(this.errorHandlingService.handleError)
@@ -67,6 +65,7 @@ export class UserService {
       // delay(1500),
       tap(() => {
         this.currentUser = null;
+        this.currentUser$.next(null);
         this.jwtService.clearToken();
       })
     );

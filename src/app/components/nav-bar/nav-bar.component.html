@@ -13,6 +13,9 @@
         <a class="nav-link" href="#" [routerLink]="['prediction']" routerLinkActive="nav-item active">Prediction<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['results']" routerLinkActive="nav-item active">Saved Results<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#" [routerLink]="['documentation']" routerLinkActive="nav-item active">Documentation<span class="sr-only">(current)</span></a>
       </li>
       <!-- <li class="nav-item">
@@ -38,7 +41,11 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
     <div class="my-2 my-lg-0">
-      <div class="mr-sm-2">Hi, User</div>
+      
+      <div *ngIf="current$ | async as current" class="mr-sm-2">Hi, {{current.firstName}}</div>
+      <div *ngIf="!(current$ | async)" class="mr-sm-2">
+        <a [routerLink]="['sign-in']" routerLinkActive="nav-item active">Sign in<span class="sr-only">(current)</span></a>
+      </div>
     </div>
   </div>
 </nav>

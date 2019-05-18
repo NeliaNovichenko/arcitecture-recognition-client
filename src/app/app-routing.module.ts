@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'prediction', component: PredictionComponent },
   // { path: 'prediction', component: PredictionComponent, canActivate: [AuthGuard] },
-  { path: 'result/:id', component: ResultComponent, canActivate: [AuthGuard] },
-  { path: 'result', component: ResultsTableComponent, canActivate: [AuthGuard] },
-  { path: 'documentation', component: DocumentationComponent, canActivate: [AuthGuard] },
+  { path: 'results', component: ResultsTableComponent },
+  // { path: 'results', component: ResultsTableComponent, canActivate: [AuthGuard] },
+  { path: 'documentation', component: DocumentationComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

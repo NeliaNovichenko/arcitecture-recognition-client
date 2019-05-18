@@ -8,7 +8,7 @@ import { ResultModel } from '../models/result.model';
 })
 export class ResultService {
 
-  private baseUrl = '/api/recognitionResult';
+  private baseUrl = 'https://localhost:44357/api/recognitionResult';
 
   constructor(private http: HttpClient) { }
 
@@ -25,8 +25,9 @@ export class ResultService {
   crete(resultDto: ResultModel, file: File): Observable<ResultModel> {
     const formData = new FormData();
     formData.append('file', file, file.name);
+    formData.set('resultDto', JSON.stringify(resultDto));
     const url = `${this.baseUrl}`;
-    return this.http.post<ResultModel>(url, { resultDto, file: formData });
+    return this.http.post<ResultModel>(url, formData);
   }
 
   update(id: number, resultDto: ResultModel): Observable<ResultModel> {

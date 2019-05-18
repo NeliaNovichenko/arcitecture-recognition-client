@@ -25,7 +25,7 @@ export class PredictionService {
             probability: resultObject[key]
           });
         });
-        return resultArray.sort((r1, r2) => r1.probability - r2.probability);
+        return resultArray.sort((r1, r2) => r2.probability - r1.probability);
       })
     );
   }

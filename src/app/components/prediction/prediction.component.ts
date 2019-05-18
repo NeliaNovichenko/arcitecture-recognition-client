@@ -18,6 +18,7 @@ export class PredictionComponent {
   public file: any;
   public result: PredictionResult[];
   public loading = false;
+  public saved = false;
 
   public title;
   public description;
@@ -29,6 +30,7 @@ export class PredictionComponent {
   ) { }
 
   onFileChanged(event: any) {
+    this.saved = false;
     this.file = event.target.files[0];
     this.imagePreviewElement.nativeElement.src = URL.createObjectURL(this.file);
   }
@@ -45,12 +47,13 @@ export class PredictionComponent {
     });
   }
 
-  saveResult() {
+  saveResult( title, description, imageDate) {
+    this.saved = false;
     const result = {
-      title: this.title,
-      description: this.description,
+      title,
+      description,
       date: new Date(),
-      imageDate: this.imageDate,
+      imageDate,
       imageName: this.file.name,
 
       style: StyleByStringName[this.result[0].style]
@@ -58,6 +61,7 @@ export class PredictionComponent {
 
     this.resultService.crete(result, this.file).subscribe(() => {
       console.log('saved');
+      this.saved = true;
     });
   }
 }

@@ -1,29 +1,29 @@
 {
     "/api/auth/*": {
-      "target": "http://localhost:44357/api/auth",
+      "target": "https://localhost:44357",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true,
       "pathRewrite": {
-        "^/api/results": "/api"
+        "^/api/auth": "/api/auth"
       }
     },
     "/api/recognitionResult/*": {
-      "target": "http://localhost:44357/api/recognitionResult",
+      "target": "https://localhost:44357",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true,
       "pathRewrite": {
-        "^/api/results": "/api"
+        "^/api/recognitionResult": "/api/recognitionResult"
       }
     },    
     "/api/user/*": {
-      "target": "http://localhost:44357/api/user",
+      "target": "https://localhost:44357",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true,
       "pathRewrite": {
-        "^/api/results": "/api"
+        "^/api/user": "/api/user"
       }
     },
     "/api/recognition/*": {
