@@ -21,7 +21,7 @@ export class PredictionService {
         const resultArray: PredictionResult[] = [];
         Object.keys(resultObject).forEach(key => {
           resultArray.push({
-            style: key,
+            style: StyleByStringName[key],
             probability: resultObject[key]
           });
         });

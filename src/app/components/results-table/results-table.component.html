@@ -1,32 +1,44 @@
-<div *ngIf="results$ | async as results">
-    <table class="table">
+
+  <div *ngIf="results$ | async as results" class="row table-container">
+        <div class="col-sm-12">
+  
+  <table class="table table-hover table-condensed">
         <thead>
           <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Date</th>
-            <th scope="col">Style</th>
-            <th scope="col">Image Info</th>
+            <th scope="col" class="col-sm-12 col-md-1">Title</th>
+            <th scope="col" class="col-sm-12 col-md-2">Description</th>
+            <th scope="col" class="col-sm-12 col-md-1">Date</th>
+            <th scope="col" class="col-sm-12 col-md-1">Style</th>
+            <th scope="col" class="col-sm-12 col-md-2">Image Info</th>
+            <th scope="col" class="col-sm-12 col-md-4">Image Preview</th>
+            <th scope="col" class="col-sm-12 col-md-1"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let result of results">
             <th scope="row">{{result.title}}</th>
-            <td>{{result.description}}</td>
+            <td><span class="break-word">{{result.description}}</span></td>
             <td>{{result.date  | date : 'short'}}</td>
-            <td>{{result.style}}</td>
+            <td>{{styleNameMapper[result.style]}}</td>
             <td>
               <div>
                 <div>{{result.imageName}}</div>
                 <div>{{result.imageDate | date : 'short'}}</div>
               </div>
             </td>
-            <td>
-                <img id="myImg" src="{{result.imagePath}}" style="width:100%;max-width:300px" onclick="openModal(result.imagePath, result.imageName)">
+            <td class="text-center">
+                <img class="rounded" 
+                  id="myImg" 
+                  alt="{{result.imageName}}"
+                  src="{{result.imagePath}}" 
+                  style="height:100%;max-height:150px" 
+                  onclick="openModal(result.imagePath, result.imageName)">
             </td>
+            <td><div onClick="deleteResult(result.id)"><i class="fas fa-trash-alt"></i></div></td>
           </tr>
         </tbody>
       </table>
+</div>
 </div>
 
 

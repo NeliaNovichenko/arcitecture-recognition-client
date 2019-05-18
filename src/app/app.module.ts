@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PredictionComponent } from './components/prediction/prediction.component';
 import { ResultsTableComponent } from './components/results-table/results-table.component';
-import { ResultComponent } from './components/result/result.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
@@ -21,7 +20,6 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     HomeComponent,
     PredictionComponent,
     ResultsTableComponent,
-    ResultComponent,
     DocumentationComponent,
     NavBarComponent,
     SignInComponent,

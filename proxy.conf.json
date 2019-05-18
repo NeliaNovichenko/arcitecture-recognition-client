@@ -25,6 +25,15 @@
       "pathRewrite": {
         "^/api/user": "/api/user"
       }
+    },   
+    "/images/*": {
+      "target": "https://localhost:44357",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/images": "/images"
+      }
     },
     "/api/recognition/*": {
       "target": "http://localhost:5000",

@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { PredictionService } from '../../services/prediction.service';
 import { PredictionResult } from '../../models/prediction-result.model';
 import { ResultService } from '../../services/result.service';
-import { StyleByStringName } from '../../models/style.enum';
+import { StyleByStringName, StyleNameString } from '../../models/style.enum';
 import { ResultModel } from 'src/app/models/result.model';
 
 @Component({
@@ -15,14 +15,12 @@ export class PredictionComponent {
   @ViewChild('imagePreview')
   imagePreviewElement;
 
+  public styleNameMapper = StyleNameString;
+
   public file: any;
   public result: PredictionResult[];
   public loading = false;
   public saved = false;
-
-  public title;
-  public description;
-  public imageDate: Date;
 
   constructor(
     private predictionService: PredictionService,

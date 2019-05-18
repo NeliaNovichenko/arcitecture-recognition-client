@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ResultsTableComponent } from './components/results-table/results-table.component';
-import { ResultComponent } from './components/result/result.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
 import { PredictionComponent } from './components/prediction/prediction.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';

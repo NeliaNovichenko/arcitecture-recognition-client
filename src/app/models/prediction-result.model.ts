@@ -6,6 +6,6 @@ export class PredictionResultObject {
 
 
 export class PredictionResult {
-    style: string;
+    style: Style;
     probability: number;
 }
