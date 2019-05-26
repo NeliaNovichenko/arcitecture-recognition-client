@@ -2,8 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { PredictionService } from '../../services/prediction.service';
 import { PredictionResult } from '../../models/prediction-result.model';
 import { ResultService } from '../../services/result.service';
-import { StyleByStringName, StyleNameString } from '../../models/style.enum';
-import { ResultModel } from 'src/app/models/result.model';
+import { StyleNameString } from '../../models/style.enum';
+import { ResultModel } from '../../models/result.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-prediction',
@@ -16,15 +17,16 @@ export class PredictionComponent {
   imagePreviewElement;
 
   public styleNameMapper = StyleNameString;
-
+  public current = this.userService.currentUser;
   public file: any;
-  public result: PredictionResult[];
+  public results: PredictionResult[];
   public loading = false;
   public saved = false;
 
   constructor(
     private predictionService: PredictionService,
-    private resultService: ResultService
+    private resultService: ResultService,
+    private userService: UserService
   ) { }
 
   onFileChanged(event: any) {
@@ -37,10 +39,10 @@ export class PredictionComponent {
     if (File.name === undefined) {
       return;
     }
-    this.result = null;
+    this.results = null;
     this.loading = true;
     this.predictionService.get(this.file).subscribe(value => {
-      this.result = value;
+      this.results = value;
       this.loading = false;
     });
   }
@@ -53,8 +55,7 @@ export class PredictionComponent {
       date: new Date(),
       imageDate,
       imageName: this.file.name,
-
-      style: StyleByStringName[this.result[0].style]
+      style: this.results[0].style
     } as ResultModel;
 
     this.resultService.crete(result, this.file).subscribe(() => {

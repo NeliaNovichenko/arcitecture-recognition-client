@@ -1,51 +1,61 @@
 
-  <div *ngIf="results$ | async as results" class="row table-container">
-        <div class="col-sm-12">
+  <h3>Saved results</h3>
   
-  <table class="table table-hover table-condensed">
+  <div  class="row table-container">
+    <table class="table table-hover table-condensed" [mfData]="results" #mf="mfDataTable">
         <thead>
           <tr>
-            <th scope="col" class="col-sm-12 col-md-1">Title</th>
-            <th scope="col" class="col-sm-12 col-md-2">Description</th>
-            <th scope="col" class="col-sm-12 col-md-1">Date</th>
-            <th scope="col" class="col-sm-12 col-md-1">Style</th>
-            <th scope="col" class="col-sm-12 col-md-2">Image Info</th>
-            <th scope="col" class="col-sm-12 col-md-4">Image Preview</th>
-            <th scope="col" class="col-sm-12 col-md-1"></th>
+            <th scope="col" style="width: 15%">
+                <mfDefaultSorter by="title">Title <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
+            <th scope="col" style="width: 20%">
+                Description
+                <!-- <mfDefaultSorter by="description">Description</mfDefaultSorter> -->
+            </th> 
+            <th scope="col" style="width: 10%">                
+                <mfDefaultSorter by="date">Date <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th> 
+            <th scope="col" style="width: 15%">  
+                <mfDefaultSorter by="styleStr">Style <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
+            <th scope="col" style="width: 10%">                
+                <mfDefaultSorter by="imageDate">Date Image Taken <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th> 
+            <th scope="col" class="text-center" style="width: 25%">
+              Image Preview
+            </th>
+            <th scope="col" style="width: 5%"></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let result of results">
+          <tr *ngFor="let result of mf.data">
             <th scope="row">{{result.title}}</th>
             <td><span class="break-word">{{result.description}}</span></td>
             <td>{{result.date  | date : 'short'}}</td>
-            <td>{{styleNameMapper[result.style]}}</td>
+            <td>{{result.styleStr}}</td>
             <td>
-              <div>
-                <div>{{result.imageName}}</div>
                 <div>{{result.imageDate | date : 'short'}}</div>
-              </div>
             </td>
             <td class="text-center">
-                <img class="rounded" 
+              <div (click)="openModal(result.imagePath, result.imageName)">
+                  <img class="rounded" 
                   id="myImg" 
                   alt="{{result.imageName}}"
                   src="{{result.imagePath}}" 
-                  style="height:100%;max-height:150px" 
-                  onclick="openModal(result.imagePath, result.imageName)">
+                  style="height:100%;max-height:150px">
+              </div>
             </td>
-            <td><div onClick="deleteResult(result.id)"><i class="fas fa-trash-alt"></i></div></td>
+            <td><div (click)="deleteResult(result.id)"><i class="fas fa-trash-alt"></i></div></td>
           </tr>
         </tbody>
       </table>
-</div>
 </div>
 
 
 <!-- The Modal -->
 <div #myModal id="myModal" class="modal">
   <!-- The Close Button -->
-  <span class="close" onclick="hideModal()">&times;</span>
+  <span class="close" (click)="hideModal()">&times;</span>
   <!-- Modal Content (The Image) -->
   <img #modalImage class="modal-content" id="img01">
   <!-- Modal Caption (Image Text) -->

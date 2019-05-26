@@ -1,0 +1,10 @@
+.carousel-container {
+    margin: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.description {
+    color: white;
+    text-shadow: 2px 2px black;
+}

@@ -50,7 +50,8 @@ export const StyleByStringName = {
     ['artNouveau']: Style.ArtNouveau,
     ['chicagoSchool']: Style.ChicagoSchool,
     ['americanCraftsman']: Style.AmericanCraftsman,
-    ['greekReviva']: Style.GreekRevival
+    ['greekRevival']: Style.GreekRevival,
+    ['bauhaus']: Style.Bauhaus
 };
 
 export const StyleNameString = {

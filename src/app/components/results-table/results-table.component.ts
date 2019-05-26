@@ -1,40 +1,57 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ResultService } from '../../services/result.service';
 import { StyleNameString } from '../../models/style.enum';
+import { ResultModel } from '../../models/result.model';
 
 @Component({
   selector: 'app-results-table',
   templateUrl: './results-table.component.html',
   styleUrls: ['./results-table.component.css']
 })
-export class ResultsTableComponent {
+export class ResultsTableComponent implements OnInit {
 
   @ViewChild('myModal')
-  modal: HTMLElement;
+  modal: ElementRef;
 
   @ViewChild('modalImage')
-  modalImage: HTMLElement;
+  modalImage: ElementRef;
 
   @ViewChild('modalCaption')
-  modalCaption: HTMLElement;
+  modalCaption: ElementRef;
 
-  public results$ = this.resultService.getAll();
-
+  public results = [];
   public styleNameMapper = StyleNameString;
+
+  ngOnInit(): void {
+    this.resultService.getAll().subscribe(
+      (array) => {
+        this.results = array.map(r => {
+          (r as any).styleStr = StyleNameString[r.style];
+          return r;
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   constructor(private resultService: ResultService) { }
 
   public openModal(path, name) {
-    this.modal.style.display = 'block';
-    (this.modalImage as any).src = path;
-    this.modalCaption.innerHTML = name;
+    this.modal.nativeElement.style.display = 'block';
+    this.modalImage.nativeElement.src = path;
+    this.modalCaption.nativeElement.innerHTML = name;
   }
 
   public hideModal() {
-    this.modal.style.display = 'none';
+    this.modal.nativeElement.style.display = 'none';
   }
 
   public deleteResult(id: number) {
-    this.resultService.delete(id);
+    this.resultService.delete(id).subscribe(() => {
+      const index = this.results.findIndex(r => r.id === id);
+      this.results.splice(index, index);
+    });
   }
 }

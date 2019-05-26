@@ -23,11 +23,8 @@ export class UserService {
     this.setUpCurrentUserFromBackend().subscribe(() => { });
   }
 
-  // login : new_user2
-  // pass: 666
   public signIn(loginModel: UserLoginModel): Observable<User> {
     const PATH = '/api/auth/sign-in';
-    // const PATH = 'https://localhost:44357/api/auth/sign-in';
 
     return this.httpClient.post<AuthModel>(PATH, loginModel)
       .pipe(
@@ -42,8 +39,7 @@ export class UserService {
   }
 
   public singUp(loginModel: UserLoginModel, firstName: string, lastName: string): Observable<User> {
-    // const PATH = '/api/auth/sign-up';
-    const PATH = 'api/auth/sign-up';
+    const PATH = '/api/auth/sign-up';
 
     return this.httpClient.post<AuthModel>(PATH, {
       signInModel: loginModel,
@@ -62,7 +58,6 @@ export class UserService {
 
   public signOut(): Observable<void> {
     return of(null).pipe(
-      // delay(1500),
       tap(() => {
         this.currentUser = null;
         this.currentUser$.next(null);
@@ -72,7 +67,11 @@ export class UserService {
   }
 
   public setUpCurrentUserFromBackend(): Observable<User> {
-    const PATH = 'api/user/current';
+    const PATH = '/api/user/current';
+
+    if (!this.jwtService.getRawToken() || this.jwtService.isExpired()) {
+      return of(null);
+    }
 
     return this.httpClient.get<User>(PATH).pipe(
       tap((user: User) => {
@@ -83,14 +82,6 @@ export class UserService {
       catchError(this.errorHandlingService.handleError)
     );
   }
-
-  // public validateLogin(login: string): Observable<boolean> {
-  //   const valid = !this.mockedUsers.some(userItem => userItem[0].login == login);
-  //   return of(valid).pipe(
-  //     delay(1500),
-  //     catchError(this.errorHandlingService.handleError)
-  //   );
-  // }
 }
 
 export class AuthModel { user: User; token: string; }

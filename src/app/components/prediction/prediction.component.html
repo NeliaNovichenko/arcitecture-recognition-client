@@ -1,6 +1,6 @@
 <div>
   <div class="m-2">
-    Hi there! Try out architecture styles prediction by uploading your building
+    Hi there! Try out Architectural styles prediction by uploading your building
     image!
   </div>
   <div class="input-group upload-block my-2">
@@ -36,8 +36,8 @@
       <div *ngIf="loading" class="spinner-border spinner" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      <div *ngIf="!loading && result">
-        <span class="d-block" *ngFor="let r of result"
+      <div *ngIf="!loading && results">
+        <span class="d-block" *ngFor="let r of results"
           >{{ styleNameMapper[r.style] }}:
           {{ r.probability | number: "1.1-1" }}%</span
         >
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="card mt-3" *ngIf="!loading && result">
+  <div class="card mt-3" *ngIf="current && !loading && results">
     <div class="card-header">
       Fill in details
     </div>

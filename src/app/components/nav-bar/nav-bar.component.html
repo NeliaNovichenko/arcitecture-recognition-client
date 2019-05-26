@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Architecture Predictions</a>
+  <a class="navbar-brand" href="#">Architectural Predictions</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -12,7 +12,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#" [routerLink]="['prediction']" routerLinkActive="nav-item active">Prediction<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="(current$ | async)">
         <a class="nav-link" href="#" [routerLink]="['results']" routerLinkActive="nav-item active">Saved Results<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -40,11 +40,15 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
-    <div class="my-2 my-lg-0">
-      
-      <div *ngIf="current$ | async as current" class="mr-sm-2">Hi, {{current.firstName}}</div>
-      <div *ngIf="!(current$ | async)" class="mr-sm-2">
-        <a [routerLink]="['sign-in']" routerLinkActive="nav-item active">Sign in<span class="sr-only">(current)</span></a>
+    <div class="my-2 my-lg-0">      
+      <div *ngIf="current$ | async as current" class="d-table">
+        <div class="mr-sm-2 d-inline-block">Hi, {{current.firstName}}</div>
+        <div class="mr-sm-2 d-inline-block" (click)="logOut()">Log out</div>
+      </div>
+      <div *ngIf="!(current$ | async)">
+        <div class="nav-item mr-sm-2">
+          <a  class="nav-link" [routerLink]="['sign-in']" routerLinkActive="nav-item active">Sign in<span class="sr-only">(current)</span></a>
+        </div>
       </div>
     </div>
   </div>

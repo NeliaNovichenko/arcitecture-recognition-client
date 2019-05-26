@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DataTableModule } from 'angular-6-datatable';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -29,7 +30,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DataTableModule
   ],
   providers: [
     { provide: Window, useValue: window },

@@ -19,12 +19,6 @@ export class ErrorHandlingService {
   public handleError = (error: any): Observable<any> => {
     console.error(error);
 
-    // console.log(this);
-
-    if (error.status === 401) {
-      // console.log(this.router);
-      this.router.navigate(['sign-in']);
-    }
 
     return throwError(error);
   }

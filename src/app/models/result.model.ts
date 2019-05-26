@@ -1,3 +1,5 @@
+import { Style } from './style.enum';
+
 export class ResultModel {
     id: number;
     title: string;
@@ -8,5 +10,5 @@ export class ResultModel {
     imageName: string;
     imagePath: string;
 
-    style: string;
+    style: Style;
 }
