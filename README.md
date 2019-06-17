@@ -1,5 +1,7 @@
 # Arcitecture Recognition Client
 
+![N|Solid](https://avatars1.githubusercontent.com/u/6582119?s=280&v=4 ) 
+
 Frontend application for architectural styles predictions of buildings by images.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
 
