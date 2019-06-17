@@ -48,4 +48,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
   - fix performance
   
 ## Contacts
-In case you have any questions please contact me via [e-mail](novichenko.nelya@gmail.com).
+In case you have any questions please contact me via  e-mail: novichenko.nelya@gmail.com.
